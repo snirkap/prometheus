@@ -1,0 +1,145 @@
+# PromQL
+
+```json
+# HELP python_gc_objects_collected_total Objects collected during gc
+# TYPE python_gc_objects_collected_total counter
+python_gc_objects_collected_total{generation="0"} 397.0
+python_gc_objects_collected_total{generation="1"} 43.0
+python_gc_objects_collected_total{generation="2"} 0.0
+
+this show how may object the gc collected at any generation 
+
+# HELP python_gc_objects_uncollectable_total Uncollectable object found during GC
+# TYPE python_gc_objects_uncollectable_total counter
+python_gc_objects_uncollectable_total{generation="0"} 0.0
+python_gc_objects_uncollectable_total{generation="1"} 0.0
+python_gc_objects_uncollectable_total{generation="2"} 0.0
+
+the same like the first one but on the object that Uncollectable because they have some references or dependencies that prevent their collection.
+
+# HELP python_gc_collections_total Number of times this generation was collected
+# TYPE python_gc_collections_total counter
+python_gc_collections_total{generation="0"} 170556.0
+python_gc_collections_total{generation="1"} 15505.0
+python_gc_collections_total{generation="2"} 1409.0
+
+this show how many mermory reclaiming  at any generetion 
+
+# HELP python_info Python platform information
+# TYPE python_info gauge
+python_info{implementation="CPython",major="3",minor="9",patchlevel="16",version="3.9.16"} 1.0
+
+show a info on the python version and 
+
+
+# HELP process_virtual_memory_bytes Virtual memory size in bytes.
+# TYPE process_virtual_memory_bytes gauge
+process_virtual_memory_bytes 2.16006656e+08
+
+show the virtual mermory size 
+
+# HELP process_resident_memory_bytes Resident memory size in bytes.
+# TYPE process_resident_memory_bytes gauge
+process_resident_memory_bytes 5.9359232e+07
+
+show the resident mermory size 
+
+# HELP process_start_time_seconds Start time of the process since unix epoch in seconds.
+# TYPE process_start_time_seconds gauge
+process_start_time_seconds 1.68494724919e+09
+
+
+# HELP process_cpu_seconds_total Total user and system CPU time spent in seconds.
+# TYPE process_cpu_seconds_total counter
+process_cpu_seconds_total 1348.04
+
+
+# HELP process_open_fds Number of open file descriptors.
+# TYPE process_open_fds gauge
+process_open_fds 7.0
+
+
+# HELP process_max_fds Maximum number of open file descriptors.
+# TYPE process_max_fds gauge
+process_max_fds 1.048576e+06
+
+
+# HELP request_processing_seconds Time spent processing request
+# TYPE request_processing_seconds summary
+request_processing_seconds_count 140.0
+request_processing_seconds_sum 35.750807531001556
+
+
+# HELP request_processing_seconds_created Time spent processing request
+# TYPE request_processing_seconds_created gauge
+request_processing_seconds_created 1.6849472507491512e+09
+
+
+# HELP events_sent_total Total number of events sent
+# TYPE events_sent_total counter
+events_sent_total 78.0
+
+
+# HELP events_sent_created Total number of events sent
+# TYPE events_sent_created gauge
+events_sent_created 1.6849472507492208e+09
+
+
+```
+
+## Description
+  1. Connect to Prometheus dashboard: URL
+  2. connect to the service /metrics
+  3. find what metrics the service is exporting
+  4. describe each metric based on type and help
+  5. write queries for:
+      ## 1:
+      1. Total Number of Events Sent      
+      events_sent_created 1684947250.7492208
+      2. Request Processing Time
+       request_processing_seconds_created 1684947250.7491512
+      3. CPU Usage
+      100 * (1 - avg by(instance) (irate(node_cpu_seconds_total{mode="idle"}[5m]))) 44.09999999999854
+
+      4. Memory Usage virtual and resident
+      process_virtual_memory_bytes{job="event-scraper-py"} 291508224
+      process_resident_memory_bytes{job="event-scraper-py"} 59535360
+
+      5. Python Garbage Collection
+      sum by(generation) (python_gc_objects_collected_total) 
+      {generation="0"}
+      397
+      {generation="1"}
+      43
+      {generation="2"}
+      0
+
+      ## 2:
+
+      6. Percentage of CPU Usage
+      100 * (1 - avg by(instance) (irate(node_cpu_seconds_total{mode="idle"}[5m]))) 44.09999999999854
+      7. Request Processing Time rate each 5m
+      rate(request_processing_seconds_created[5m])
+      8. CPU Usage rate each 5m
+      rate(node_cpu_seconds_total{mode="idle"}[5m])
+      9.  Rate of Events Sent rate each 5m
+      rate(events_sent_created[5m])
+      10. Average Number of Objects Collected by Python
+      avg_over_time(python_gc_objects_collected_total[5m])
+      11. Ratio of Uncollectable Objects
+      python_gc_objects_uncollectable_total / (python_gc_objects_collected_total + python_gc_objects_uncollectable_total)
+      12. Memory Usage Ratio
+      memory_used_bytes / memory_total_bytes
+      13. Rate of File Descriptor Usage
+      rate(process_open_fds[5m])
+
+
+      app:
+      container="event-scraper-py" 
+      endpoint="event-scraper-py"
+      ip="10.244.0.12:8000"
+      job="event-scraper-py"
+      namespace="scraper"
+      pod="event-scraper-py-f68cccc4d-x8kjl"
+      service="event-scraper-py"
+      
