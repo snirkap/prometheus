@@ -1,4 +1,5 @@
 # prometheus
+enter google cloud shell and do this commands:
 commands:
 1. kind create cluster --name=snir
 2. helm repo add prometheus-community https://prometheuscommunity.github.io/helm-charts
