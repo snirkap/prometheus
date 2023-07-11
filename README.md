@@ -15,3 +15,9 @@
 
 i take the Kubernetes/Compute Resources/Cluster Dashboard and edit it and delete the panels idint need and this is the json for the first dashborod:
 
+### redis:
+1. clone the deploy and service
+2. kubectl apply -f redis-master-deployment.yaml -n monitoring
+3. kubectl apply -f redis-master-service.yaml -n monitoring
+4. helm install redis-exporter prometheus-community/prometheus-redis-exporter -f prometheus-redis_values.yaml -n monitoring
+5. kubectl port-forward service/redis-exporter-prometheus-redis-exporter -n monitoring 9121:9121 --address='0.0.0.0' &  ### this command to check that the exporter is give a metric
