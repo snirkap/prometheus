@@ -1,0 +1,7 @@
+redis:
+  uri: "redis://redis-service:6379"
+
+serviceMonitor:
+  enabled: true
+  labels: 
+    release: prometheus
