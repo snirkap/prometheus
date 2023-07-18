@@ -1,20 +1,20 @@
 # prometheus
-## enter google cloud shell and do this commands:
-### commands:
-1. kind create cluster --name=snir
-2. helm repo add prometheus-community https://prometheuscommunity.github.io/helm-charts
-3. helm repo update
-4. kubectl create namespace monitoring
-5. helm install prometheus prometheus-community/kube-prometheus-stack -n monitoring
-6. wget https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz 
-7. tar -zxvf ngrok-v3-stable-linux-amd64.tgz 
-8. ./ngrok config add-authtoken 2QCcclEE80tINnI1Gx8QMyKLFbr_4hscbjiAdumc5BjHBiNwN
-9. kubectl port-forward service/prometheus-kube-prometheus-prometheus -n monitoring 9090:9090 --address='0.0.0.0' &
-10. kubectl port-forward service/prometheus-grafana -n monitoring 8080:80 --address='0.0.0.0' &
-11. ./ngrok http 0.0.0.0:9090
-
-i take the Kubernetes/Compute Resources/Cluster Dashboard and edit it and delete the panels idint need and this is the json for the first dashborod:
-
+## commands:
+1. minikube start --driver=docker .
+2. git clone https://github.com/snirkap/prometheus.git .
+3. cd prometheus/ .
+4. kubectl create namespace monitoring .
+5. kubectl create namespace redis .
+6. kubectl create namespace rabbitmq .
+7. helm repo add prometheus-community https://prometheuscommunity.github.io/helm-charts .
+8. helm repo add bitnami https://charts.bitnami.com/bitnami .
+9. helm repo update .
+11. helm install prometheus prometheus-community/kube-prometheus-stack -f prometheus-values.yaml -n monitoring .
+12. helm install my-redis bitnami/redis -f redis-values.yaml -n redis .
+13. helm install my-rabbitmq bitnami/rabbitmq -f rabbitmq-values.yaml -n rabbitmq .
+14. 
+15. kubectl port-forward service/prometheus-kube-prometheus-prometheus -n monitoring 9090:9090 --address='0.0.0.0' & .
+16. kubectl port-forward service/prometheus-grafana -n monitoring 8080:80 --address='0.0.0.0' & .
 ### redis:
 1. clone the deploy and service
 2. kubectl apply -f redis-master-deployment.yaml -n monitoring
