@@ -1,0 +1,29 @@
+grafana:
+  enabled: true
+  plugins:
+    - redis-datasource
+    - redis-app
+  apps:
+    - type: redis-app
+      disabled: false
+  additionalDataSources:
+    - name: redis
+      type: redis-datasource
+      access: proxy
+      editable: true
+      orgId: 1
+      url: redis://my-redis-master.redis:6379
+      jsonData:
+        client: standalone
+        poolSize: 5
+        timeout: 10
+        pingInterval: 0
+        pipelineWindow: 0
+      secureJsonData:
+        password: 123
+      version: 1
+---
+ruleSelectorNilUsesHelmValues: false
+---
+serviceMonitorSelectorNilUsesHelmValues: false
+
