@@ -11,10 +11,10 @@
 9. helm repo update .
 11. helm install prometheus prometheus-community/kube-prometheus-stack -f prometheus-values.yaml -n monitoring .
 12. helm install my-redis bitnami/redis -f redis-values.yaml -n redis .
-13. helm install my-rabbitmq bitnami/rabbitmq -f rabbitmq-values.yaml -n rabbitmq
+13. helm install my-rabbitmq bitnami/rabbitmq -f rabbitmq-values.yaml -n rabbitmq .
 14. 
-15. kubectl port-forward service/prometheus-kube-prometheus-prometheus -n monitoring 9090:9090 --address='0.0.0.0' &
-16. kubectl port-forward service/prometheus-grafana -n monitoring 8080:80 --address='0.0.0.0' &
+15. kubectl port-forward service/prometheus-kube-prometheus-prometheus -n monitoring 9090:9090 --address='0.0.0.0' & .
+16. kubectl port-forward service/prometheus-grafana -n monitoring 8080:80 --address='0.0.0.0' & .
 ### redis:
 1. clone the deploy and service
 2. kubectl apply -f redis-master-deployment.yaml -n monitoring
