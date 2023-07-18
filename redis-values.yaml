@@ -1,0 +1,15 @@
+auth:
+  password: "123"
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+    additionalLabels:
+      app.kubernetes.io/component: metrics
+  prometheusRule:
+    enabled: true
+    namespace: "redis"
+    
+
+    
+
