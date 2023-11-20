@@ -105,7 +105,7 @@ These changes enable the scraping of RabbitMQ pod metrics with Prometheus. It es
     }
 This sidecar looks for ConfigMap in the same namespace as the Grafana pod , with the label “grafana_dashboard” set to “1”.
 and inside the "dashboard1.json:" i put the full json file of the rabbitmq dashbord. 
-It is important to note that this dashboard was created using the [RabbitMQ-Overview](https://calculator.aws/#/addService/RDSMySQL)  dashboard available in the Grafana store. The entire content and design of the dashboard are based on the pre-existing 'RabbitMQ-Overview' dashboard available in the Grafana store.
+It is important to note that this dashboard was created using the [RabbitMQ-Overview](https://grafana.com/grafana/dashboards/10991-rabbitmq-overview/)  dashboard available in the Grafana store. The entire content and design of the dashboard are based on the pre-existing 'RabbitMQ-Overview' dashboard available in the Grafana store.
 
   
 
