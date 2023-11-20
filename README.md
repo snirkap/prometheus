@@ -8,7 +8,7 @@ and you have a dashbord for your node that called "Node Exporter / Nodes".
 4. kubectl create namespace monitoring 
 5. kubectl create namespace redis 
 6. kubectl create namespace rabbitmq 
-7. helm repo add prometheus-community https://prometheuscommunity.github.io/helm-charts 
+7. helm repo add prometheus-community [https://prometheuscommunity.github.io/helm-charts](https://github.com/prometheus-community/helm-charts.git) 
 8. helm repo add bitnami https://charts.bitnami.com/bitnami 
 9. helm repo update 
 11. helm install prometheus prometheus-community/kube-prometheus-stack -f prometheus-values.yaml -n monitoring 
