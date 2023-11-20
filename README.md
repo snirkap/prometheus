@@ -1,5 +1,5 @@
 # monitor project 
-This project aims to provide a comprehensive monitoring solution using Prometheus and Grafana. It includes the integration of Redis with a Grafana plugin and there is also a several dashbord for redis and connects to Prometheus RabbitMQ through ServiceMonitor. Additionally, a dashboard for RabbitMQ has been created using a custom ConfigMap.
+This project aims to provide a comprehensive monitoring solution using Prometheus and Grafana. It includes the integration of Redis with a Grafana plugin, there is also a  connection to Prometheus RabbitMQ through ServiceMonitor with Prometheus operator. Additionally, a dashboard for RabbitMQ has been created using a custom ConfigMap.
 and you have a dashbord for your node that called "Node Exporter / Nodes".
 ## Setup:
 1. minikube start --driver=docker 
