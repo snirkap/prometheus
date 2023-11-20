@@ -17,6 +17,7 @@ and you have a dashbord for your node that called "Node Exporter / Nodes".
 14. kubectl apply -f configmap.yaml -n monitoring 
 15. kubectl port-forward service/prometheus-kube-prometheus-prometheus -n monitoring 9090:9090 --address='0.0.0.0' & 
 16. kubectl port-forward service/prometheus-grafana -n monitoring 8080:80 --address='0.0.0.0' &
+    (the user for grafana is: prom-operator and the password is: admin)
 ## tutorial:
 ### this is the files i used to configure the defult chart of Prometheus, Redis, and RabbitMQ.
 * prometheus-values.yaml
